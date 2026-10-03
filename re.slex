@@ -1,0 +1,23 @@
+# re.slex -- the regular expression language's tokens.
+#
+
+%kinds re.lex.TokenKind
+
+%token
+  LET      "let"   IN       "in"    EPSILON  "@"
+  BAR      "|"     STAR     "*"     PLUS     "+"
+  QUESTION "?"     DOT      "."     EQ       "="
+  OPAREN   "("     CPAREN   ")"     OBRACKET "["
+  CBRACKET "]"
+
+# whitespace and comments produce no tokens
+[ \t\f\r\n]+
+//[^\n]*
+/\*([^*]|\*+[^*/])*\*+/
+
+[a-z]                    { Token(LETTER, text, pos) }
+[A-Z][a-z]*              { Token(ID, text, pos) }
+
+# error rules: reachable only when nothing above matches
+/\*                      { error("Unterminated comment") }
+.                        { error(s"Illegal character '$text'") }

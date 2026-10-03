@@ -1,0 +1,33 @@
+# re.scup -- the regular expression language's grammar.
+#
+# TODO: replace the stub with the real grammar.  Remember from HW 3:
+# no left recursion; one rule per precedence level (postfix operators
+# bind tighter than concatenation '.', which binds tighter than
+# alternation '|').  A %left block with a %binary rule builds a whole
+# ladder of binary operators, and %chain(base, suffixRule) runs a
+# postfix loop, binding $$ to the expression built so far.  Every
+# atom alternative should start with a distinct terminal -- if two
+# share a prefix, the LL(1) check names the conflicting productions
+# when the grammar loads (`sbt "runMain scup.check re.scup"` checks
+# it without running anything else).
+#
+# You must also handle let-bindings:
+#
+#   let X = c.o.w in X.X
+#
+# Grammar rules are static, so you cannot thread an environment
+# through the parse.  Instead have your actions build a small
+# intermediate tree of your own that still contains Let and Id nodes,
+# and substitute each name's definition in a second "resolve" pass in
+# REParser.scala -- so bindings never show up in your final AST.  An
+# unbound name is an REError.
+
+%{
+  import re.ast.*
+%}
+
+%start  re
+%type   re: RENode
+
+# The stub grammar: a "regular expression" is a single letter.
+re ::= LETTER  { REEmpty() /* TODO: surely not REEmpty... */ } ;

@@ -1,0 +1,6 @@
+: yes
+ab: yes
+aabb: yes
+a: no
+aba: no
+abab: yes

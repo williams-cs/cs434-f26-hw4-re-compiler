@@ -1,0 +1,8 @@
+: yes
+c: yes
+ab: yes
+bac: yes
+abba: yes
+abbac: yes
+cc: no
+aab: no
