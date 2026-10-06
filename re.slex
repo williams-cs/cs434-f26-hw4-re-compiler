@@ -11,7 +11,7 @@
   CBRACKET "]"
 
 # whitespace and comments produce no tokens
-[ \t\f\r\n]+
+[ \t\r\n]+
 //[^\n]*
 /\*([^*]|\*+[^*/])*\*+/
 
